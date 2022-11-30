@@ -33,23 +33,15 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(png|jpg|gif|jpe?g|svg)$/,
+        test: /\.(png|jpg|jpe?g|gif|svg)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
-              publicPath: './public/images',
+              name: '[name].[ext]?[contenthash]',
               outputPath: './images',
-              emitFile: true
-            }  
+            },
           },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug: true,
-            }
-          }
         ],
       }
     ],
@@ -60,12 +52,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      favicon: './public/images/favicon.ico',
-      manifest: './public/manifest.json'
+      favicon: './public/favicon.ico'
     }),
     new MiniCssExtractPlugin({
       filename: './css/style.css'
     })
   ],
-  devtool: 'inline-source-map',
+  devtool: 'inline-source-map'
 }
